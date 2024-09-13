@@ -1,0 +1,163 @@
+#include <iostream>
+#include<string>
+using namespace std;
+
+class Client {
+private:
+    string name;
+    int id;
+     string password;
+    double balance;
+public:
+    void setName(string Name) {
+        bool flag = false;
+        for (int i = 0; i < Name.size(); i++) {
+            flag = false;
+
+            if ((Name[i] >= 'a' && Name[i] <= 'z')   || (Name[i] >= 'A' && Name[i] <= 'Z')) {
+                flag = true;
+            }
+            else {
+                break;
+            }
+        }
+
+        if (flag == true && (Name.size() >= 5 && Name.size() <= 20)) {
+            name = Name;
+        }
+        else {
+            cout << "Retry to enter the name,the name must be alphabetic chars and min size 5 and max size 20\n";
+          
+        }
+    }
+    void setPassword(string  Password) {
+        if (Password.size() >= 8 && Password. size()<= 20) {
+             password= Password;
+        }
+        else {
+            cout << "Retry to enter a password, Password must be with min size 8 and max size 20\n";
+        }
+    }
+    void setBalance(double Balance) {
+        if (Balance >= 1500) {
+            balance = Balance;
+        }
+        else {
+            cout << "Balance must be much than or equel 1500\n";
+        }
+    }
+    void deposit(double amount) {
+
+        balance += amount;
+    }
+    void withdraw(double amount) {
+        if (balance < amount) {
+            cout<<"Balance is less than the amount\n";
+        }
+        else {
+            balance -= amount;
+        }
+    }
+    void transferTo(double amount, Client& recipient) {
+        if (balance < amount) {
+            cout << "Can't do this process\n";
+        }
+        else {
+            balance -= amount;
+            recipient.balance += amount;
+        }
+    }
+    void checkBalance() {
+        cout<<"Balance is  " << balance<<endl;
+    }
+    void display() {
+        cout << "Name is " << name <<endl;
+        cout << "Balance is " << balance << endl;
+       
+    }
+};
+
+class Employee {
+protected:
+    string name;
+    int id;
+    string password;
+    double salary;
+public:
+    void setName(string Name) {
+        bool flag = false;
+
+        for (int i = 0; i < Name.size(); i++) {
+            flag = false;
+
+
+            if ((Name[i] >= 'a' && Name[i] <= 'z')   || (Name[i] >= 'A' && Name[i] <= 'Z')) {
+                flag = true;
+            }
+            else {
+                
+                break;
+            }
+
+        }
+
+
+        if (flag == true && (Name.size() >= 5 && Name.size() <= 20)) {
+            name = Name;
+        }
+
+        else {
+            cout << "Retry to enter the name,the name must be alphabetic chars and min size 5 and max size 20\n";
+
+        }
+
+
+    }
+
+
+
+    void setPassword(string  Password) {
+        if (Password.size() >= 8 && Password.size() <= 20) {
+            password = Password;
+        }
+        else {
+            cout << "Retry to enter a password, Password must be with min size 8 and max size 20\n";
+        }
+    }
+    void setBalance(double Salary) {
+        if (Salary >=5000) {
+           salary= Salary;
+        }
+        else {
+            cout << "Salary must be much than or equel 5000\n";
+        }
+    }
+    void display() {
+        cout << "Name is " << name << endl;
+        cout << "Salary is " << salary << endl;
+        cout << "Id is " << id << endl;
+    }
+
+};
+
+int main()
+{
+     
+    Client x;
+    Client c;
+    c.setBalance(1700);
+    x.setName("23456");
+   /* x.setPassword("00");
+    x.setBalance(10000);
+    x.deposit(1000);
+    x.withdraw(1000);
+    x.transferTo(2000, c);
+    c.checkBalance();
+    x.checkBalance();*/
+   
+
+
+
+
+
+}
