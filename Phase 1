@@ -175,10 +175,14 @@ public:
   }
 };
 
-class Admin : public Employee
+class Admin : public Person
 {
+  double salary;
 public:
-  Admin(string name, int id, string password, double salary) : Employee(name, id, password, salary) {}
+  Admin(string name, int id, string password, double salary) : Person(name, id, password)
+  {
+    this->salary = salary;
+  }
 };
 
 int main()
