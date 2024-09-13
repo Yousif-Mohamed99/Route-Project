@@ -1,0 +1,187 @@
+#include <iostream>
+using namespace std;
+
+class Person
+{
+protected:
+  int id;
+  string name;
+  string password;
+public:
+  Person (string name, int id, string password)
+  {
+    this->name = name;
+    this->id = id;
+    this->password = password;
+  }
+  void setName(string name) 
+  {
+  bool flag = true;
+  for (int i = 0; i < name.size(); i++) 
+    {
+      if (!isalpha(name[i]))
+      {
+        flag = false;
+        break;
+      }
+    }
+    if (flag && (name.size() >= 5 && name.size() <= 20)) 
+    {
+      this->name = name;
+    }
+    else 
+    {
+      cout << "Retry to enter the name; the name must be alphabetic chars and min size 5 and max size 20\n";
+    }
+  }
+
+  void setPassword(string password) 
+  {
+    if (password.size() >= 8 && password. size()<= 20) 
+    {
+      this->password = password;
+    }
+    else 
+    {
+      cout << "Retry to enter a password, Password must be with min size 8 and max size 20\n";
+    }
+  }
+
+  int getId()
+  {
+    return id;
+  }
+  string getName()
+  {
+    return name;
+  }
+  string getPassword()
+  {
+    return password;
+  }
+  void display()
+  {
+    cout << "Your name is: " << name<< endl;
+    cout << "Your id is: " << id << endl;
+    cout << "Your password is: " << password << endl;
+  }
+};
+
+class Client : public Person
+{
+private:
+  double balance;
+public:
+  Client (string name, int id, string password, double balance) : Person(name,id,password)
+  {
+    this->balance = balance;
+  }
+  void setBalance(double balance) 
+  {
+    if (balance >= 1500) 
+    {
+      this->balance = balance;
+    }
+    else 
+    {
+      cout << "Balance must be greater than or equal to 1500\n";
+    }
+  }
+  double getBalance()
+  {
+    return balance;
+  }
+
+  void deposit(double amount)
+  {
+    if (amount < 0)
+    {
+      cout << "Amount to deposit cannot be negative";
+      return;
+    }
+    balance += amount;
+    cout << "Successful Transcation\n";
+    cout << "your balance is: " << balance << endl;
+  }
+  void withdraw (double amount)
+  {
+    if (amount < 0)
+    {
+      cout << "Amount to withdraw cannot be negative";
+      return;
+    }
+    if(amount < balance)
+    {
+      balance -=amount;
+      cout << "Successful Transcation\n";
+      cout << "your balance is: " << balance << endl;
+      return;
+    }
+    else cout << "Your balance is insufficient\n";
+  }
+  void transferTo (double amount, Client &recipient)
+  {
+    if (amount < 0)
+    {
+      cout << "Amount to transfer cannot be negative";
+      return;
+    }
+    if (amount < balance)
+    {
+      recipient.balance += amount;
+      balance -= amount;
+      cout << "Successful Transcation\n";
+    }
+    else
+    {
+      cout << "Insufficient Funds To Execute The Transaction\n";
+    }
+  }
+  void checkBalance()
+  {
+    cout << "Your balance is: " << balance <<endl;
+  }
+  void display()
+  {
+    Person::display();
+    cout << "\nYour balance is: " << balance<<endl;
+  }
+};
+
+class Employee : public Person 
+{
+private:
+  double salary;
+public:
+  Employee(string name, int id, string password, double salary) : Person(name, id, password)
+  {
+    setSalary(salary);
+  }
+  void setSalary(double salary) 
+  {
+    if (salary >= 5000) 
+    {
+      this->salary = salary;
+    }
+    else 
+    {
+      cout << "Salary must be greater than or equal to 5000\n";
+    }
+  }
+  void display() 
+  {
+    Person::display();
+    cout << "\n Your Salary is: " << salary;
+  }
+};
+
+class Admin : public Employee
+{
+public:
+  Admin(string name, int id, string password, double salary) : Employee(name, id, password, salary) {}
+};
+
+int main()
+{
+  return 0;
+}
